@@ -30,7 +30,7 @@ public:
     uint32_t GetWidth() { return m_Width; }
     uint32_t GetHeight() { return m_Height; }
 
-    virtual void OnActivate(bool windowActive) {}
+    virtual void OnActivate(bool windowActive) { (void)windowActive; }
 
     // Pure virtual functions
     virtual void OnParseCommandLine(LPSTR lpCmdLine, uint32_t* pWidth, uint32_t* pHeight, bool *pbFullScreen) = 0;
