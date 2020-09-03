@@ -46,7 +46,7 @@ template<typename T> inline T AlignDown(T val, T alignment)
 }
 template<typename T> inline T DivideRoundingUp(T a, T b)
 {
-    return (x + y - (T)1) / y;
+    return (a + b - (T)1) / b;
 }
 
 class Profile
