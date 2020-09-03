@@ -31,25 +31,25 @@
 
 namespace CAULDRON_DX12
 {
-    void Device::OnCreate(const char *pAppName, const char *pEngine, bool bValidationEnabled, bool bGpuValidationEnabled, HWND hWnd)
+    void Device::OnCreate(const char *pAppName, const char *pEngine, DebugLayerSettings const& pDebugLayerSettings, HWND hWnd)
     {
         // Enable the D3D12 debug layer
         //
         // Note that it turns out the validation and debug layer are known to cause
         // deadlocks in certain circumstances, for example when the vsync interval
         // is 0 and full screen is used
-        if (bValidationEnabled || bGpuValidationEnabled)
+        if (pDebugLayerSettings.ValidationEnabled || pDebugLayerSettings.GpuValidationEnabled)
         {
             ID3D12Debug1 *pDebugController;
             if (D3D12GetDebugInterface(IID_PPV_ARGS(&pDebugController)) == S_OK)
             {
-                if (bValidationEnabled)
+                if (pDebugLayerSettings.ValidationEnabled)
                 {
                     pDebugController->EnableDebugLayer();
                 }
-                pDebugController->SetEnableGPUBasedValidation(bGpuValidationEnabled);
+                pDebugController->SetEnableGPUBasedValidation(pDebugLayerSettings.GpuValidationEnabled);
 
-                pDebugController->SetEnableSynchronizedCommandQueueValidation(false);
+                pDebugController->SetEnableSynchronizedCommandQueueValidation(pDebugLayerSettings.SynchronizedCommandQueueValidation);
                 pDebugController->Release();
             }
         }

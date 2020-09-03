@@ -28,10 +28,16 @@ namespace CAULDRON_DX12
     // Just a device class with many helper functions
     //
 
+    struct DebugLayerSettings {
+        bool ValidationEnabled = false;
+        bool GpuValidationEnabled = false;
+        bool SynchronizedCommandQueueValidation = false;
+    };
+
     class Device
     {
     public:
-        void OnCreate(const char *pAppName, const char *pEngine, bool bValidationEnabled, bool bGpuValidationEnabled, HWND hWnd);
+        void OnCreate(const char *pAppName, const char *pEngine, DebugLayerSettings const & pDebugLayerSettings, HWND hWnd);
         void OnDestroy();
 
         ID3D12Device *GetDevice() { return m_pDevice; }
